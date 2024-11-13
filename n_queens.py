@@ -9,12 +9,16 @@ class Solution(object):
         board_border = range(len(board))
 
         ## The Placement Algorithm
-        square = [0, 1]     # Put first square
+        square = [0, 0]     # Put first square
         board[square[0]][square[1]] = 1     # Show the queen on the board
 
         reachable_squares = list()
+        # Horizontal reachable squares are not examined, 'cause no queen is gonne be out in same row with queen in hand.
+
+        # Vertical reachable squares:
         [reachable_squares.append([x, square[1]]) for x in board_border]                # Reachable squares toward down
 
+        # Diagonal reachable squares:
         for step in range(len(board))[1:]:
             if square[0]+step in board_border and square[1]-step in board_border:       # Reachable squares toward bottom-lef
                 reachable_squares.append([square[0]+step,square[1]-step])
