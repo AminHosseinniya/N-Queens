@@ -9,3 +9,6 @@ class Solution(object):
         
         for row in board:
             print(row)
+
+solution = Solution()
+solution.solveNQueens(4)
