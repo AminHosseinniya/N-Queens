@@ -6,13 +6,20 @@ class Solution(object):
         """ 
         placement_sets = []     # To hold all valid placements
         board = [[0] * n for _ in range(n)]     # To represent the chess board
+        
+        reachable_squares = list()
+        valid_squares = list()
 
-        ## The Placement Algorithm
+      
         queen_0 = [0, 0]     # Put first square
         board[queen_0[0]][queen_0[1]] = 1     # Show the queen on the board
-
-        reachable_squares = list()
         reachable_squares = self.reach_finder(board, queen_0, reachable_squares)
+
+        ## The Placement Algorithm
+        for row in range(len(board)):
+            valid_squares.append([[row, i] for i in range(n) if [row, i] not in reachable_squares])
+        print(valid_squares)            
+
 
 
         # To show the board:
@@ -44,4 +51,4 @@ class Solution(object):
 
 
 solution = Solution()
-solution.solveNQueens(5)
+solution.solveNQueens(4)
