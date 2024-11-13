@@ -9,7 +9,7 @@ class Solution(object):
         board_border = range(len(board))
 
         ## The Placement Algorithm
-        square = [0, 0]     # Put first square
+        square = [0, 1]     # Put first square
         board[square[0]][square[1]] = 1     # Show the queen on the board
 
         reachable_squares = list()
@@ -22,6 +22,9 @@ class Solution(object):
                 reachable_squares.append([square[0]+step,square[1]+step])
         print("\nreachable cells: ", reachable_squares)
 
+        # To show the board:
+        for square in reachable_squares:
+            board[square[0]][square[1]] = "*"
 
 
 
@@ -29,7 +32,7 @@ class Solution(object):
 
         print("\nboard:")
         for row in board:
-            print(row)
+            print("  ".join(str(element) for element in row))
 
 solution = Solution()
 solution.solveNQueens(4)
