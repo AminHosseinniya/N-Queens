@@ -4,16 +4,16 @@ class Solution(object):
         :type n: int
         :rtype: List[List[str]]
         """ 
-        placement_sets = []     # To hold all valid placements
+        placement_sets = list()     # To hold all valid placements
         board = [[0] * n for _ in range(n)]     # To represent the chess board
         
         reachable_squares = list()
         valid_squares = list()
 
-      
-        queen_0 = [0, 0]     # Put first square
-        board[queen_0[0]][queen_0[1]] = 1     # Show the queen on the board
-        reachable_squares = self.reach_finder(board, queen_0, reachable_squares)
+        queens = [None, None]*n
+        queens[0] = [0, 0]     # Put first queen
+        board[queens[0][0]][queens[0][1]] = 1     # Show the queen on the board
+        reachable_squares = self.reach_finder(board, queens[0], reachable_squares)
 
         ## The Placement Algorithm
         for row in range(len(board)):
