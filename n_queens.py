@@ -13,7 +13,7 @@ class Solution(object):
 
         # queens[0][1] = 0
         for i in range(n):
-            queens[0][1] = i   # Put first queen
+            queens[0][1] = i   # Put queen of first row
             # board[queens[0][0]][queens[0][1]] = 1     # Show the queen on the board
             reachable_squares = self.reach_finder(board, queens[0], reachable_squares)
             valid_squares[i] = [[i, col] for col in range(n) if [i, col] not in reachable_squares]
