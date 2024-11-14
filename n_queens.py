@@ -15,7 +15,7 @@ class Solution(object):
         queens = [[i, None] for i in range(n)]
         queens[0] = [0, 0]     # Put first queen
         board[queens[0][0]][queens[0][1]] = 1     # Show the queen on the board
-        reachable_squares = self.reach_finder(board, queens, reachable_squares)
+        reachable_squares = self.reach_finder(board, queens[0], reachable_squares)
 
         for row in range(len(board)):
             valid_squares.append([[row, i] for i in range(n) if [row, i] not in reachable_squares])
@@ -34,20 +34,19 @@ class Solution(object):
             print("  ".join(str(element) for element in row))
 
 
-    def reach_finder(self, board, queens, reach_list):        # This function is what I call a Filter. like a net with a special shape
+    def reach_finder(self, board, queen_coords, reach_list):        # This function is what I call a Filter. like a net with a special shape
                                                                     # that fells over something.
         board_border = range(len(board))
         # Horizontal reachable squares are not examined, 'cause no queen is gonne be out in same row with queen in hand.
-        for queen_coords in queens:
-            # Vertical reachable squares:
-            [reach_list.append([x, queen_coords[1]]) for x in board_border]        # Reachable squares toward down
+        # Vertical reachable squares:
+        [reach_list.append([x, queen_coords[1]]) for x in board_border]        # Reachable squares toward down
 
-            # Diagonal reachable squares:
-            for step in range(len(board))[1:]:
-                if queen_coords[0]+step in board_border and queen_coords[1]-step in board_border:       # Reachable squares toward bottom-lef
-                    reach_list.append([queen_coords[0]+step, queen_coords[1]-step])
-                if queen_coords[0]+step in board_border and queen_coords[1]+step in board_border:       # Reachable squares toward bottom-right
-                    reach_list.append([queen_coords[0]+step, queen_coords[1]+step])
+        # Diagonal reachable squares:
+        for step in range(len(board))[1:]:
+            if queen_coords[0]+step in board_border and queen_coords[1]-step in board_border:       # Reachable squares toward bottom-lef
+                reach_list.append([queen_coords[0]+step, queen_coords[1]-step])
+            if queen_coords[0]+step in board_border and queen_coords[1]+step in board_border:       # Reachable squares toward bottom-right
+                reach_list.append([queen_coords[0]+step, queen_coords[1]+step])
 
         return reach_list
 
