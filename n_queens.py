@@ -10,7 +10,9 @@ class Solution(object):
         reachable_squares = list()
         valid_squares = [[]]*n
         queens = [[i, None] for i in range(n)]
-        rows_guide = [{"status": False, "num_of_valids": 0}]*n
+        rows_guide = [{"status": False, "num_of_valids": 0}]*n      # "status" of each row should be True if there are still
+                                                                    # valid squares in that row that are not examined yet, 
+                                                                    # and "num_of_valids" show number of this valid sqaures.
 
         # queens[0][1] = 0
         for i in range(n):
