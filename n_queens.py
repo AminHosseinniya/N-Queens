@@ -7,22 +7,32 @@ class Solution(object):
         placements_set = list()     # To hold all valid placements
         board = [[0] * n for _ in range(n)]     # To represent the chess board
         
-        reachable_squares = list()
-        valid_squares = [[]]*n
+        valid_squares = [[] for _ in range(n)]
         queens = [[i, None] for i in range(n)]
-        rows_guide = [{"status": False, "num_of_valids": 0}]*n      # "status" of each row should be True if there are still
-                                                                    # valid squares in that row that are not examined yet, 
-                                                                    # and "num_of_valids" show number of this valid sqaures.
+        rows_guide = [{"status": False, "num_of_valids": 0} for _ in range(n)]      # "status" of each row should be True if there are still
+                                                                                    # valid squares in that row that are not examined yet, 
+                                                                                    # and "num_of_valids" show number of this valid sqaures.
 
         # queens[0][1] = 0
         for i in range(n):
+            reachable_squares = list()
             queens[0][1] = i   # Put queen of first row
             # board[queens[0][0]][queens[0][1]] = 1     # Show the queen on the board
             reachable_squares = self.reach_finder(board, queens[0], reachable_squares)
 
             row = i+1   # Shows which row is under examination
             valid_squares[row] = [[row, col] for col in range(n) if [row, col] not in reachable_squares]
-    
+            if valid_squares[row] == []:
+                continue
+            else:
+                rows_guide[row]["status"] = True
+                rows_guide[row]["num_of_valids"] = len(valid_squares[row])
+                for square in valid_squares:
+                    queens[row][1] = square[1]      # Each element of queens list contains [row, col] of one queen.
+                                                    # "row" is always equal to index of that element so it represents the row of that queen
+                                                    # and "col" represents the column of that queen.
+                    reachable_squares = self.reach_finder(board, queens[row], reachable_squares)
+
         print(valid_squares)            
 
 
