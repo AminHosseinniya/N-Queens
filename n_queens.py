@@ -33,7 +33,8 @@ class Solution(object):
             print("  ".join(str(element) for element in row))
 
 
-    def reach_finder(self, board, queen_coords, reach_list):
+    def reach_finder(self, board, queen_coords, reach_list):        # This function is what I call a Filter. like a net with a special shape
+                                                                    # that fells over something.
         board_border = range(len(board))
         # Horizontal reachable squares are not examined, 'cause no queen is gonne be out in same row with queen in hand.
         # Vertical reachable squares:
