@@ -7,16 +7,18 @@ class Solution(object):
         placements_set = list()     # To hold all valid placements
         board = [[0] * n for _ in range(n)]     # To represent the chess board
         
-        valid_squares = [[] for _ in range(n)]
-        queens = [[i, None] for i in range(n)]
+        valid_squares = [n for _ in range(n)]
+        queens = [[i, 0] for i in range(n)]
         rows_guide = [{"status": False, "num_of_valids": 0} for _ in range(n)]      # "status" of each row should be True if there are still
                                                                                     # valid squares in that row that are not examined yet, 
                                                                                     # and "num_of_valids" show number of this valid sqaures.
-
+        print("queens: ", queens)
         # queens[0][1] = 0
         for i in range(n):
-            reachable_squares = list()
-            queens[0][1] = i   # Put queen of first row
+            # reachable_squares = list()
+            queens[0][1] = 0   # Put queen of first row
+            print("queens after: ", queens)
+
             # board[queens[0][0]][queens[0][1]] = 1     # Show the queen on the board
         # print(valid_squares)            
 
