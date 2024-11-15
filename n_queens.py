@@ -18,28 +18,10 @@ class Solution(object):
             reachable_squares = list()
             queens[0][1] = i   # Put queen of first row
             # board[queens[0][0]][queens[0][1]] = 1     # Show the queen on the board
-            reachable_squares = self.reach_finder(board, queens[0], reachable_squares)
+        # print(valid_squares)            
 
-            row = i+1   # Shows which row is under examination
-            valid_squares[row] = [[row, col] for col in range(n) if [row, col] not in reachable_squares]
-            if valid_squares[row] == []:
-                continue
-            else:
-                rows_guide[row]["status"] = True
-                rows_guide[row]["num_of_valids"] = len(valid_squares[row])
-                for square in valid_squares:
-                    queens[row][1] = square[1]      # Each element of queens list contains [row, col] of one queen.
-                                                    # "row" is always equal to index of that element so it represents the row of that queen
-                                                    # and "col" represents the column of that queen.
-                    reachable_squares = self.reach_finder(board, queens[row], reachable_squares)
-
-        print(valid_squares)            
-
-
-
-
-
-        # To show the board:
+        self.show_the_board( board, reachable_squares)
+    def show_the_board(self, board, reachable_squares):
         for square in reachable_squares:
             board[square[0]][square[1]] = "*"
         
